@@ -13,6 +13,10 @@ class TileEditor:
         self.tilemap_length = input("Enter tilemap length: ")  # Fixed typo: lenght -> length
         self.mode = input("Paste in the world or leave empty for a new one: ")
 
+        #self.tilemap_width = 20
+        #self.tilemap_length = 20
+        #self.mode = ""
+
         self.window_size = (600, 600)
         self.screen = pygame.display.set_mode(self.window_size, pygame.SRCALPHA)
         pygame.display.set_caption("Tile Editor")
@@ -78,6 +82,7 @@ class TileEditor:
     def update(self):
         self._event_handling()
         self.screen.fill("cadetblue1")
+        self.internal_surface.fill("cadetblue1")
         self.draw_queue = []
 
 
@@ -103,7 +108,7 @@ class TileEditor:
                 if (mouse_pos[0] - (self.rect_scroll * 64)) // 64 > 0 < 13:
                     self.selected_slot_id = str(((mouse_pos[0] - (self.rect_scroll * 64)) + self.viewportx) // 64)
             else:
-                if mouse_pos[0] // 64 < self.tilemap_width and mouse_pos[1] // 64 < self.tilemap_lenght:
+                if mouse_pos[0] // 64 < self.tilemap_width and mouse_pos[1] // 64 < self.tilemap_length:
                     self.world[mouse_pos[1] // 64][mouse_pos[0] // 64] = self.selected_slot_id
 
         tilemanager.update_tile_map(self.world, self.sub_world, self.tile_slot_list, self.tilemap_width, 64, 0, 0, self.internal_surface, self.draw_queue)
