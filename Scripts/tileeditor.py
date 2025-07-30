@@ -91,6 +91,7 @@ class TileEditor:
         right_mouse_key_pressed = pygame.mouse.get_pressed()[0]
         keys = pygame.key.get_pressed()
 
+        
         if keys[pygame.K_UP]:
             self.viewporty += 5
         if keys[pygame.K_DOWN]:
@@ -105,7 +106,7 @@ class TileEditor:
 
         if right_mouse_key_pressed:
             if actual_ducking_mouse_pos[1] > self.window_size[1] - 64:
-                if (mouse_pos[0] - (self.rect_scroll * 64)) // 64 > 0 < 13:
+                if (((mouse_pos[0] - (self.rect_scroll * 64)) + self.viewportx) // 64) > 0:
                     self.selected_slot_id = str(((mouse_pos[0] - (self.rect_scroll * 64)) + self.viewportx) // 64)
             else:
                 if mouse_pos[0] // 64 < self.tilemap_width and mouse_pos[1] // 64 < self.tilemap_length:
